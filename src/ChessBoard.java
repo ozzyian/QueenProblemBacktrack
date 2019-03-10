@@ -69,7 +69,7 @@ public class ChessBoard {
 	 */
 	
 	private boolean findSolution(int col) {
-		if(col>=size) {
+		if(col==size) {
 			return true;
 		}
 		
