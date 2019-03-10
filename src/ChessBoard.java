@@ -11,6 +11,11 @@ public class ChessBoard {
 	private HashSet<Integer> rowData = new HashSet<>();
 	private HashSet<Integer> diagonalData = new HashSet<>();
 	private HashSet<Integer> otherDiagonalData = new HashSet<>();
+	private int size;
+	
+	public ChessBoard(int sizeOfProblem) {
+		size = sizeOfProblem;
+	}
 	
 	/**
 	 * När en drottning kan placeras så anropas denna metod. Parametrarna är 
@@ -64,11 +69,11 @@ public class ChessBoard {
 	 */
 	
 	private boolean findSolution(int col) {
-		if(col>=8) {
+		if(col>=size) {
 			return true;
 		}
 		
-		for(int row=0; row<8; row++) {
+		for(int row=0; row<size; row++) {
 			if(isPlacementSafe(row, col)) {
 				insertQueen(row, col);
 				if(findSolution(col+1)) {
@@ -89,13 +94,13 @@ public class ChessBoard {
 		if(findSolution(0)) {
 			
 			
-			int[][] boardRep = new int[8][8];
+			int[][] boardRep = new int[size][size];
 			for(Queen q : queens) {
 				boardRep[q.row][q.col] = 1;
 			}
 			
-			for(int row=0; row<8; row++) {
-				for(int col=0; col<8; col++) {
+			for(int row=0; row<size; row++) {
+				for(int col=0; col<size; col++) {
 					System.out.print(boardRep[row][col] + " ");
 				}
 				System.out.println();
@@ -104,7 +109,7 @@ public class ChessBoard {
 	}
 
 	public static void main(String[] args) {
-		ChessBoard c = new ChessBoard();
+		ChessBoard c = new ChessBoard(8);
 		c.getSolution();
 	}
 	class Queen {
